@@ -156,7 +156,7 @@ export default {
           }
           let filteredEmails = eRes.data.list.filter(cnt=> this.filters.indexOf(cnt.category_no) !== -1)
           console.log('diff:', this.diff)
-          console.log('filteredEmails:', filteredEmails)
+          console.log('filteredEmails len:', filteredEmails.length)
           let posInfo = {
             0: []
           }
@@ -164,6 +164,7 @@ export default {
           let adIdx;
           if(filteredEmails.length < 4 - this.diff ){
             this.diff = this.diff + filteredEmails.length
+            this.contents = this.contents.concat(filteredEmails)
           }else{
           if(this.diff !== 4){
             
@@ -172,6 +173,7 @@ export default {
               if((idx + 1 + this.diff)%4 ===  0){
                 newContents.push(aRes.data.list[(idx + 1 + this.diff)/4 - 1])
                 adIdx = newContents.length - 1
+                console.log('adIdx:', adIdx)
                 console.log('email:', email)                
                 console.log('idx:', idx)
                 console.log('ad:', aRes.data.list[(idx + 1 + this.diff )/4 - 1])
@@ -198,31 +200,6 @@ export default {
           }
 
 
-
-
-          //if(this.diff === 2){
-          //  filteredEmails.forEach((email, idx) => {
-          //    newContents.push(email)
-          //    if(((idx  + 1 ) % 4 === this.diff -2) && idx !== 9){
-          //      newContents.push(aRes.data.list[(idx + 1 + this.diff )/4 - 1])
-          //      console.log('idx:', idx)
-          //      console.log('ad:', aRes.data.list[(idx + i + this.diff )/4 - 1])
-          //      console.log('ad idx:',(idx + 1 + this.diff )/4 - 1)    
-          //    }
-          //  })
-          //}else{
-          //  if(this.diff === 4) newContents.push(aRes.data.list[0])
-//
-          //  filteredEmails.forEach((email, idx) => {
-          //    newContents.push(email)              
-          //    if((idx  + 1 ) % 4 === this.diff -2){
-          //      newContents.push(aRes.data.list[(idx + 1 + this.diff )/4 - 1])
-          //      console.log('idx:', idx)
-          //      console.log('ad:', aRes.data.list[(idx + 1 + this.diff )/4 - 1])
-          //      console.log('ad idx:',(idx + 1 + this.diff )/4 - 1)    
-          //    }
-          //  })
-          //}
         }else{
 
           let limit = this.pageC%2 === 1 && this.pageC !== 1? 3: 2 
@@ -305,6 +282,7 @@ export default {
         })
         this.contents = filteredContents
         this.diff = this.contents.length - 1 - adIdx
+        console.log('storeFilters diff:', this.diff)
       }
     },
     toggleModal(open, kind, content = null){
