@@ -63,14 +63,14 @@ export default {
         #details-modal{
             background: white;
             padding: 30px;
-            max-width: 800px;
-            min-width: 300px;
+            max-width: 330px;
+            min-width: 336px;
 
             #close-ic{
                 width: 32px;
                 position: relative;
                 top: -28px;
-                left: 795px;
+                left: 331px;
                 cursor: pointer;
             }
 
